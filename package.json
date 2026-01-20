@@ -12,7 +12,7 @@
   ],
   "dependencies": {
     "ci-info": "^3.8.0",
-    "display-notification": "2.0.0",
+    "display-notification": "^3.0.0",
     "fixpack": "^4.0.0",
     "get-port": "5.1.1",
     "mailparser": "^3.9.1",
