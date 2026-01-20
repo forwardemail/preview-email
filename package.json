@@ -16,7 +16,7 @@
     "fixpack": "^4.0.0",
     "get-port": "5.1.1",
     "mailparser": "^3.7.1",
-    "nodemailer": "^6.9.13",
+    "nodemailer": "^7.0.9",
     "open": "7",
     "p-event": "4.2.0",
     "p-wait-for": "3.2.0",
