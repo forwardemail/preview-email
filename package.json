@@ -1,7 +1,7 @@
 {
   "name": "preview-email",
   "description": "Automatically opens your browser and iOS Simulator to preview Node.js email messages sent with Nodemailer. Made for Forward Email and Lad. Cross-browser and cross-platform email testing.",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "author": "Forward Email (https://forwardemail.net)",
   "bugs": {
     "url": "https://github.com/forwardemail/test-preview-emails-cross-browsers-ios-simulator-nodejs-javascript/issues",
