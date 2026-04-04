@@ -26,6 +26,8 @@ const transport = nodemailer.createTransport({
 const templateFilePath = path.join(__dirname, 'template.pug');
 const renderFilePromise = util.promisify(pug.renderFile);
 
+let displayNotification;
+
 const previewEmail = async (message, options) => {
   options = {
     dir: os.tmpdir(),
@@ -88,7 +90,8 @@ const previewEmail = async (message, options) => {
   // `xcrun simctl openurl booted ${url}`
   //
   if (isMacOS && !isCI && options.openSimulator) {
-    const { displayNotification } = await import('display-notification');
+    if (!displayNotification)
+      ({ displayNotification } = await import('display-notification'));
     try {
       // <https://github.com/sindresorhus/open/blob/05ba9e150cc1a2629e518a9cc19b586c6ca3f269/index.js#L205-L222>
       const simulator = childProcess.spawn('open', ['-a', 'Simulator']);
