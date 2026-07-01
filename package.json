@@ -21,7 +21,7 @@
     "p-event": "4.2.0",
     "p-wait-for": "3.2.0",
     "pug": "^3.0.3",
-    "uuid": "^9.0.1"
+    "uuid": "^11.1.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
