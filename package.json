@@ -15,7 +15,7 @@
     "display-notification": "^3.0.0",
     "fixpack": "^4.0.0",
     "get-port": "5.1.1",
-    "mailparser": "^3.9.6",
+    "mailparser": "3.9.8",
     "nodemailer": "^9.0.1",
     "open": "7",
     "p-event": "4.2.0",
