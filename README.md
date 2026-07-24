@@ -127,7 +127,7 @@ NODE_DEBUG=preview-email node app.js
 
 * `message` (Object) - a [Nodemailer message configuration object](https://nodemailer.com/message/)
 * `options` (Object) - an object with the following two properties:
-  * `id` (String) - a unique ID for the file name created for the preview in `dir` (defaults to `uuid.v4()` from [uuid][])
+  * `id` (String) - a unique ID for the file name created for the preview in `dir` (defaults to [`crypto.randomUUID()`](https://nodejs.org/api/crypto.html#cryptorandomuuidoptions))
   * `dir` (String) - a path to a directory for saving the generated email previews (defaults to `os.tmpdir()`, see [os docs](https://nodejs.org/api/os.html#os_os_tmpdir) for more insight)
   * `open` (Object or Boolean) - an options object that is passed to [open][] (defaults to `{ wait: false }`) - if set to `false` then it will not open the email automatically in the browser using [open][], and if set to `true` then it will default to `{ wait: false }`
   * `template` (String) - a file path to a `pug` template file (defaults to preview-email's [template.pug](template.pug) by default) - **this is where you can pass a custom template for rendering email previews, e.g. your own stylesheet**
@@ -152,8 +152,6 @@ NODE_DEBUG=preview-email node app.js
 [node]: https://nodejs.org/
 
 [nodemailer]: https://nodemailer.com
-
-[uuid]: https://github.com/kelektiv/node-uuid
 
 [lad]: https://lad.js.org
 
