@@ -1,4 +1,5 @@
 const childProcess = require('child_process');
+const crypto = require('crypto');
 const fs = require('fs');
 const http = require('http');
 const os = require('os');
@@ -12,7 +13,6 @@ const open = require('open');
 const pEvent = require('p-event');
 const pWaitFor = require('p-wait-for');
 const pug = require('pug');
-const uuid = require('uuid');
 const { isCI } = require('ci-info');
 const { simpleParser } = require('mailparser');
 
@@ -31,7 +31,7 @@ let displayNotification;
 const previewEmail = async (message, options) => {
   options = {
     dir: os.tmpdir(),
-    id: uuid.v4(),
+    id: crypto.randomUUID(),
     open: { wait: false },
     template: templateFilePath,
     urlTransform: (path) => `file://${path}`,
