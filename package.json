@@ -7,6 +7,9 @@
     "url": "https://github.com/forwardemail/test-preview-emails-cross-browsers-ios-simulator-nodejs-javascript/issues",
     "email": "niftylettuce@gmail.com"
   },
+  "bundledDependencies": [
+    "mailparser"
+  ],
   "contributors": [
     "Nick Baugh <niftylettuce@gmail.com> (http://niftylettuce.com/)"
   ],
@@ -15,7 +18,7 @@
     "display-notification": "^3.0.0",
     "fixpack": "^4.0.0",
     "get-port": "5.1.1",
-    "mailparser": "^3.9.17",
+    "mailparser": "3.9.17",
     "nodemailer": "^9.0.6",
     "open": "7",
     "p-event": "4.2.0",
@@ -37,7 +40,7 @@
     "xo": "^0.54.2"
   },
   "engines": {
-    "node": ">=14.17"
+    "node": ">=18.12.0"
   },
   "files": [
     "index.js",
@@ -96,6 +99,11 @@
   ],
   "license": "MIT",
   "main": "index.js",
+  "overrides": {
+    "mailparser": {
+      "html-to-text": "9.0.5"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/forwardemail/test-preview-emails-cross-browsers-ios-simulator-nodejs-javascript"
@@ -103,6 +111,7 @@
   "scripts": {
     "ava": "cross-env NODE_ENV=test NODE_DEBUG=preview-email ava",
     "lint": "xo --fix && remark . -qfo && fixpack",
+    "prepack": "npm pkg set dependencies.html-to-text=9.0.5 --prefix node_modules/mailparser",
     "prepare": "husky install",
     "pretest": "npm run lint",
     "test": "cross-env NODE_ENV=test NODE_DEBUG=preview-email nyc ava"
