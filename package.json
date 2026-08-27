@@ -7,9 +7,6 @@
     "url": "https://github.com/forwardemail/test-preview-emails-cross-browsers-ios-simulator-nodejs-javascript/issues",
     "email": "niftylettuce@gmail.com"
   },
-  "bundledDependencies": [
-    "mailparser"
-  ],
   "contributors": [
     "Nick Baugh <niftylettuce@gmail.com> (http://niftylettuce.com/)"
   ],
@@ -111,7 +108,6 @@
   "scripts": {
     "ava": "cross-env NODE_ENV=test NODE_DEBUG=preview-email ava",
     "lint": "xo --fix && remark . -qfo && fixpack",
-    "prepack": "npm pkg set dependencies.html-to-text=9.0.5 --prefix node_modules/mailparser",
     "prepare": "husky install",
     "pretest": "npm run lint",
     "test": "cross-env NODE_ENV=test NODE_DEBUG=preview-email nyc ava"
