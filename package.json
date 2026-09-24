@@ -11,30 +11,30 @@
     "Nick Baugh <niftylettuce@gmail.com> (http://niftylettuce.com/)"
   ],
   "dependencies": {
-    "ci-info": "^3.8.0",
+    "ci-info": "^4.4.0",
     "display-notification": "^3.0.0",
-    "fixpack": "^4.0.0",
-    "get-port": "5.1.1",
-    "mailparser": "3.9.28",
-    "nodemailer": "^9.0.6",
-    "open": "7",
-    "p-event": "4.2.0",
-    "p-wait-for": "3.2.0",
-    "pug": "^3.0.3"
+    "get-port": "7.2.0",
+    "mailparser": "3.9.20",
+    "nodemailer": "^9.1.1",
+    "open": "10",
+    "p-event": "6.0.1",
+    "p-wait-for": "5.0.2",
+    "pug": "^3.0.4"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.3.0",
-    "@commitlint/config-conventional": "^19.2.2",
-    "ava": "^5.2.0",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "ava": "^5.3.1",
     "cross-env": "^7.0.3",
-    "eslint": "^8.40.0",
+    "eslint": "^8.57.1",
     "eslint-config-xo-lass": "^2.0.1",
-    "husky": "8.0.3",
-    "lint-staged": "^15.2.5",
-    "nyc": "^15.1.0",
+    "fixpack": "^4.0.0",
+    "husky": "9.1.7",
+    "lint-staged": "^15.5.2",
+    "nyc": "^17.1.0",
     "remark-cli": "11.0.0",
     "remark-preset-github": "^4.0.4",
-    "xo": "^0.54.2"
+    "xo": "^0.56.0"
   },
   "engines": {
     "node": ">=18.12.0"
@@ -98,7 +98,10 @@
   "main": "index.js",
   "overrides": {
     "mailparser": {
-      "html-to-text": "9.0.5"
+      "@zone-eu/mailsplit": "5.4.17",
+      "encoding-japanese": "2.4.0",
+      "html-to-text": "9.0.5",
+      "libmime": "5.4.4"
     }
   },
   "repository": {
@@ -108,7 +111,7 @@
   "scripts": {
     "ava": "cross-env NODE_ENV=test NODE_DEBUG=preview-email ava",
     "lint": "xo --fix && remark . -qfo && fixpack",
-    "prepare": "husky install",
+    "prepare": "husky",
     "pretest": "npm run lint",
     "test": "cross-env NODE_ENV=test NODE_DEBUG=preview-email nyc ava"
   }

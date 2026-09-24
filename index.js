@@ -1,24 +1,20 @@
-const childProcess = require('child_process');
-const crypto = require('crypto');
-const fs = require('fs');
-const http = require('http');
-const os = require('os');
-const path = require('path');
-const process = require('process');
-const util = require('util');
-const { Buffer } = require('buffer');
-const getPort = require('get-port');
+const childProcess = require('node:child_process');
+const crypto = require('node:crypto');
+const fs = require('node:fs');
+const http = require('node:http');
+const os = require('node:os');
+const path = require('node:path');
+const process = require('node:process');
+const util = require('node:util');
+const { Buffer } = require('node:buffer');
 const nodemailer = require('nodemailer');
-const open = require('open');
-const pEvent = require('p-event');
-const pWaitFor = require('p-wait-for');
 const pug = require('pug');
 const { isCI } = require('ci-info');
 const { simpleParser } = require('mailparser');
 
 const debug = util.debuglog('preview-email');
 const isMacOS = os.platform() === 'darwin';
-const writeFile = util.promisify(fs.writeFile);
+const { writeFile } = fs.promises;
 const transport = nodemailer.createTransport({
   streamTransport: true,
   buffer: true
@@ -26,7 +22,12 @@ const transport = nodemailer.createTransport({
 const templateFilePath = path.join(__dirname, 'template.pug');
 const renderFilePromise = util.promisify(pug.renderFile);
 
+// these dependencies are ESM-only so they are lazily loaded with `import()`
+let open;
 let displayNotification;
+let getPort;
+let pEvent;
+let pWaitFor;
 
 const previewEmail = async (message, options) => {
   options = {
@@ -79,7 +80,10 @@ const previewEmail = async (message, options) => {
 
   if (!options.returnHTML) {
     await writeFile(filePath, html);
-    if (options.open) await open(url, options.open);
+    if (options.open) {
+      if (!open) ({ default: open } = await import('open'));
+      await open(url, options.open);
+    }
   }
 
   //
@@ -90,8 +94,20 @@ const previewEmail = async (message, options) => {
   // `xcrun simctl openurl booted ${url}`
   //
   if (isMacOS && !isCI && options.openSimulator) {
-    if (!displayNotification)
-      ({ displayNotification } = await import('display-notification'));
+    if (!displayNotification) {
+      [
+        { default: displayNotification },
+        { default: getPort },
+        { pEvent },
+        { default: pWaitFor }
+      ] = await Promise.all([
+        import('display-notification'),
+        import('get-port'),
+        import('p-event'),
+        import('p-wait-for')
+      ]);
+    }
+
     try {
       // <https://github.com/sindresorhus/open/blob/05ba9e150cc1a2629e518a9cc19b586c6ca3f269/index.js#L205-L222>
       const simulator = childProcess.spawn('open', ['-a', 'Simulator']);
